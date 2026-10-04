@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Công Cụ Tìm Giá Tốt & Ưu Đãi Shopee/Lazada</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #f4f6f8; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
+        .container { background: #ffffff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); width: 100%; max-width: 500px; text-align: center; }
+        h2 { color: #ee4d2d; margin-bottom: 10px; font-size: 22px; }
+        p { color: #666; font-size: 14px; margin-bottom: 20px; }
+        input[type="text"] { width: 100%; padding: 12px 15px; border: 2px solid #ddd; border-radius: 8px; font-size: 14px; outline: none; transition: 0.3s; margin-bottom: 15px; }
+        input[type="text"]:focus { border-color: #ee4d2d; }
+        button { width: 100%; background-color: #ee4d2d; color: white; border: none; padding: 12px; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        button:hover { background-color: #d73211; }
+        .result-box { margin-top: 25px; padding: 15px; background: #fff5f2; border: 1px dashed #ee4d2d; border-radius: 8px; display: none; }
+        .result-btn { display: inline-block; width: 100%; background: #2e7d32; color: white; text-decoration: none; padding: 12px; border-radius: 8px; font-weight: bold; margin-top: 10px; }
+        .result-btn:hover { background: #1b5e20; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>🔥 Tìm Giá Tốt & Mã Giảm Giá</h2>
+    <p>Dán đường link sản phẩm Shopee/Lazada vào đây để nhận ưu đãi</p>
+    
+    <input type="text" id="productUrl" placeholder="Dán link sản phẩm tại đây...">
+    <button onclick="convertLink()">KÍCH HOẠT ƯU ĐÃI & TÌM GIÁ TỐT</button>
+
+    <div class="result-box" id="resultBox">
+        <p style="color: #2e7d32; font-weight: bold; margin-bottom: 5px;">✅ Đã tìm thấy liên kết ưu đãi!</p>
+        <p style="font-size: 12px; color: #555;">Nhấp vào nút bên dưới để truy cập sản phẩm với giá ưu đãi tốt nhất:</p>
+        <a href="#" id="affiliateLink" target="_blank" class="result-btn">🛒 ĐẾN NƠI BÁN NGAY</a>
+    </div>
+</div>
+
+<script>
+    // THAY MÃ AFFILIATE CỦA BẠN VÀO ĐÂY
+    const SHOPEE_AFF_ID = "YOUR_SHOPEE_SUB_ID"; // Thay bằng ID Shopee Affiliate của bạn
+
+    function convertLink() {
+        let rawUrl = document.getElementById('productUrl').value.trim();
+        let resultBox = document.getElementById('resultBox');
+        let affiliateLink = document.getElementById('affiliateLink');
+
+        if (!rawUrl) {
+            alert("Vui lòng dán đường link sản phẩm!");
+            return;
+        }
+
+        // Kiểm tra nếu là link Shopee
+        if (rawUrl.includes("shopee.vn") || rawUrl.includes("shp.ee")) {
+            // Cấu trúc nối thêm tham số theo dõi Affiliate
+            let finalUrl = rawUrl;
+            if (rawUrl.includes("?")) {
+                finalUrl += "&smtt=" + SHOPEE_AFF_ID;
+            } else {
+                finalUrl += "?smtt=" + SHOPEE_AFF_ID;
+            }
+            
+            affiliateLink.href = finalUrl;
+            resultBox.style.display = "block";
+        } 
+        else {
+            alert("Hiện tại công cụ hỗ trợ tốt nhất cho link Shopee. Vui lòng kiểm tra lại link!");
+        }
+    }
+</script>
+
+</body>
+</html>
